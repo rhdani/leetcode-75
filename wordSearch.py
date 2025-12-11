@@ -2,8 +2,7 @@ def word_search(grid, word):
 
     rows = len(grid)
     cols = len(grid[0])
-    print ("rows is ", rows, "cols is ", cols)
-    results = []
+    solution = [(-1, -1)] * len(word)
 
     def backtrack(r, c, idx):
         # If all characters found
@@ -19,6 +18,7 @@ def word_search(grid, word):
 
         # Mark visited by using a placeholder
         temp = grid[r][c]
+        solution[idx] = (r, c)
         grid[r][c] = '#'
 
         # Explore all 4 directions
@@ -29,6 +29,9 @@ def word_search(grid, word):
 
         # Restore character
         grid[r][c] = temp
+        #Update solution if not found
+        if (not found):
+            solution[idx] = (-1, -1)
 
         return found
 
@@ -37,7 +40,15 @@ def word_search(grid, word):
     for i in range(rows):
         for j in range(cols):
             if backtrack(i, j, 0):
+                solution[0] = (i, j)
                 retVal = True
+                break #Important otherwise solution can get overridden incorrectly
+        if retVal:
+            break
+
+    if (retVal):
+        for i in range(len(word)):
+            print("Letter ", word[i], "in location ", solution[i])
 
     return retVal
 
