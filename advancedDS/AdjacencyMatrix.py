@@ -35,6 +35,15 @@ class AdjacencyMatrix:
             return True
         return False
 
+    def getNeighbors(self, nodeIndex) -> list:
+        retVal = []
+        if nodeIndex > self.n:
+            return retVal
+        for i in range(self.n):
+            if (self.matrix[nodeIndex][i] == 1):
+                retVal.append(i)
+        return retVal
+
     def remove_edge(self, u, v):
         """Removes the edge between u and v by setting it to 0."""
         self.add_edge(u, v, weight=0)
