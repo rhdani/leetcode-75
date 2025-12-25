@@ -1,20 +1,14 @@
-from collections import defaultdict, Counter, deque
+from collections import defaultdict, deque
 
 def alien_order(words):
 
-    alphabet_graph = defaultdict(list)
-    for item in words:
-        for char in item:
-            if char not in alphabet_graph:
-                alphabet_graph[char] = []
-
+    alphabet_graph = {char: set() for word in words for char in word}
     indegree = {node: 0 for node in alphabet_graph}
     
     for i in range(len(words)):
         if i == 0:
             continue
-        currentWord = words[i]
-        previousWord = words[i-1]
+        currentWord, previousWord = words[i], words[i-1]
         if (currentWord.startswith(previousWord)):
             if len(currentWord) < len(previousWord):
                 return ""
@@ -22,17 +16,19 @@ def alien_order(words):
                 continue
         if (previousWord.startswith(currentWord) and previousWord != currentWord):
             return ""
-        j = 0;
+        j = 0
         curChar = currentWord[j]
         prevChar = previousWord[j]
         minLength = min(len(currentWord), len(previousWord))
-        while curChar == prevChar:
-            j = j + 1
+        for j in range(minLength):
             curChar = currentWord[j]
             prevChar = previousWord[j]
+            if curChar != prevChar:
+                if curChar not in alphabet_graph[prevChar]:
+                    alphabet_graph[prevChar].add(curChar)
+                    indegree[curChar] += 1
+                break
 
-        alphabet_graph[prevChar].append(curChar)
-        indegree[curChar] += 1
     # Add nodes with 0 in-degree to the queue
     queue = deque()
     for item in indegree:
@@ -55,14 +51,10 @@ def alien_order(words):
     #print(alphabet_graph)
     #print(indegree)
     #print(topo_order)
-    
-    retVal = ""
+    #If topo_order doesn't contain all characters, there was a cycle
     if (len(topo_order) != len(alphabet_graph)):
-        return retVal
-    for item in topo_order:
-        retVal = retVal + item
-
-    return retVal
+        return ""
+    return "".join(topo_order)
 
 # Driver code
 def main():
