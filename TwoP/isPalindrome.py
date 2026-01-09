@@ -17,3 +17,21 @@ def is_palindrome(s):
       right -= 1
 
   return True
+
+def main():
+    test_cases = [
+        "A man, a plan, a canal: Panama",
+        "race a car",
+        "1A@2!3 23!2@a1",
+        "No 'x' in Nixon",
+        "12321",
+    ]
+
+    for i in test_cases:
+        print("\n\tString:", i,"\n")
+        print(is_palindrome(i))
+        print("-" * 100)
+
+
+if __name__ == "__main__":
+    main()
