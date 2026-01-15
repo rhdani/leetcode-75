@@ -1,23 +1,17 @@
+from Stack import *
+
 def remove_duplicates(s):
 
-    myStack = []
-    stackSize = 0
+    myStack = Stack()
     for i in range(len(s)):
-        if len(myStack) == 0:
-            myStack.append(s[i])
-            stackSize += 1
+        if myStack.is_empty():
+            myStack.push(s[i])
             continue
-        top = stackSize - 1
-        if top < 0:
-            continue
-        if (s[i] == myStack[top]):
+        if (s[i] == myStack.top()):
             myStack.pop()
-            stackSize = stackSize - 1
         else:
-            myStack.append(s[i])
-            stackSize = stackSize + 1
-    
-    return "".join(myStack)
+            myStack.push(s[i])
+    return myStack.getString()
 
 # Driver code
 def main():
