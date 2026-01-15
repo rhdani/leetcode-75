@@ -20,3 +20,8 @@ class Stack:
         if self.is_empty():
             return None
         return self.stack_list.pop()
+
+    def getString(self):
+        if self.is_empty():
+            return ""
+        return ''.join(self.stack_list)
