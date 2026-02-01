@@ -24,7 +24,6 @@ def employee_free_time(schedule):
             res.append(Interval(prev_end, curr.start))
 
         prev_end = max(prev_end, curr.end)
-    # Replace this placeholder return statement with your code
     return res
     
 # Function for displaying interval list
