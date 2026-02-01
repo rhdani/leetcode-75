@@ -13,8 +13,6 @@ from collections import Counter
 import heapq    
 
 def least_interval(tasks, n):
-    # If there is no cooling requirement, tasks can run back-to-back.
-    # The minimum time is simply the number of tasks.
     if n == 0:
         return len(tasks)
 
