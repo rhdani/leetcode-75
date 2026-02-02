@@ -27,11 +27,23 @@ def main():
 
     k = [5, 50, 7, 4, 8]
 
+    expected = [6, 15, 0, 3, 24]
+
     for i in range(len(k)):
+        # compute result (keep original print output format)
+        res = k_smallest_number(lists[i], k[i])
         print(i + 1, ".\t Input lists: ", lists[i],
               f"\n\t K = {k[i]}",
               f"\n\t {k[i]}th smallest number from the given lists is: ",
-              k_smallest_number(lists[i], k[i]), sep="")
+              res, sep="")
+
+        # validate using assert and report Pass/Fail
+        try:
+            assert res == expected[i]
+            print("\tTest Result: Pass")
+        except AssertionError:
+            print("\tTest Result: Fail")
+
         print("-" * 100)
 
 if __name__ == '__main__':
