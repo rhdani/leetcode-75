@@ -1,10 +1,9 @@
 def letter_combinations(digits):
 
     result = []
-    if not digits or len(digits) == 0:
+    if not digits:
         return result
     numbers_map = {
-        '1': "",
         '2': "abc",
         '3': "def",
         '4': "ghi",
